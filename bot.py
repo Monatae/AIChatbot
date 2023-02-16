@@ -2,7 +2,7 @@ from chatterbot import ChatBot
 from chatterbot.trainers import ChatterBotCorpusTrainer
 
 
-chatbot = ChatBot("Friday", storage_adapter="chatterbot.storage.SQLStorageAdapter", database_uri="", read_only=True)
+chatbot = ChatBot("Friday", storage_adapter="chatterbot.storage.SQLStorageAdapter", database_uri="sqlite:///database.sqlite3", read_only=True)
 
 #trainer = ListTrainer(chatbot)
 #trainer.train(sample_conversation)
