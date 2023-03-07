@@ -1,10 +1,12 @@
 from chatterbot import ChatBot
 from chatterbot.trainers import ChatterBotCorpusTrainer
+from chatterbot.trainers import ListTrainer
 
 
-chatbot = ChatBot("Friday", storage_adapter="chatterbot.storage.SQLStorageAdapter", database_uri="", read_only=True)
+chatbot = ChatBot("Friday")
 
 #trainer = ListTrainer(chatbot)
+#sample_conversation = ['hello', 'how are you?']
 #trainer.train(sample_conversation)
 
 chatbot.set_trainer(ChatterBotCorpusTrainer)
