@@ -15,25 +15,30 @@ friday = ChatBot("Friday")
 
 #training the chatbot
 friday.set_trainer(ChatterBotCorpusTrainer)
-friday.train("chatterbot.corpus.english.quries")
+friday.train("chatterbot.corpus.english.quries", "chatterbot.corpus.english.greetings", "chatterbot.corpus.english.conversations")
 
 exit_tuple = ('exit', 'see you later', 'bye')
 
 while True:
     #database connection
-    con = sqlite3.connect("db.sqlite3")
-    df = pd.read_sql_query("SELECT * from StatementTable", con)
+    connection = sqlite3.connect("db.sqlite3")
+    df = pd.read_sql_query("SELECT * from StatementTable", connection)
     
     user_input = input('You: ')
+    revised_user_input = user_input.replace('You: ', '', 1)
     
     
-    if user_input.lower() in exit_tuple:
+    #searching through database
+    
+    if df.query(revised_user_input) is False:
+        print('Friday: I am sorry, but I do not understand.')
+        
+    elif user_input.lower() in exit_tuple:
         print('Friday: Bye')
         break
-    
-    elif user_input not in df['text']:
-        print('Friday: I am sorry, but I do not understand.')
     
     else:
         response = friday.get_response(user_input.replace('You: ', '', 1))
         print('Friday: ', response)
+    
+    
