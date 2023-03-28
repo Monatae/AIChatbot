@@ -25,6 +25,7 @@ exit_tuple = ('exit', 'see you later', 'bye')
 
 while True:
     #database connection
+    #
     connection = sqlite3.connect("db.sqlite3")
     df = pd.read_sql_query("SELECT * from StatementTable", connection)
     

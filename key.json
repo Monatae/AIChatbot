@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "ordinal-gear-381907",
+  "private_key_id": "5861a7acc5c835cd0bc618845222af565de5d17e",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQC4UhBelQsTnzNN\n/hXF27bcu1zcM8CDlY0kU+1R8wYK//bx+hIN8+4ii28WYoKcxaliw62QM1Z8K/1A\n0xBlkGtI/xz0lyXTv9kaLlhWirab/TNxcLqwNRYiJ7F/3kRpLeu+HdTQzbhgPhMZ\nBUOZwS+cjVV/UzoHAOR9FpNVkUZyCGFdoWhmG4iviSps9A3o6HFum8r+xbzdCj5k\n/wVj8w9BbvVEo0tC94x7SErbCWFF/kfJiyKkbMbYgNnY6kKXL1FfLKnYk7Ad8WLH\nsu9OrD2ZLtDllNZiyKTWuJo6d4TIk7EoQCQmOkj/YI3tb2eJvlv7WhkNaiDx9/1f\ndN4P/olVAgMBAAECggEAKDJLXBkUWpHeMizOakEVcrNQl7wYiImxh2HfMD83yufR\n3qj6zXysKu/uCLtwgQhxPXbvj7JGctt0BjJRUdjqMLfkBGo/B1wAGF/Rh4QGOWQB\nV0SujfVxz36JDNn34NkxH1upmOS4SBLZftwhRzN0cud2pQcNMVBORAJLnL5LFtxi\nFsnFXWXw9ogBxjT6w/Mop/68a7C01Efk7bhYW/x5tXV2Eu71dH8vSFgtz8VuwXTU\nnqtuh2UPSfAieiqLwbS+0HiQDsG0pB+59uG+8Wve3m/FNVQJh7WCCCwRxOxTWUOV\nCqaUYhYHMAwmG+pk29GaYO5XqgXhPF10snOuSQJviQKBgQD0q09W7x7K59pWOCgB\n3M2JsDbhppUD+TV/5VCUnqdHV0NaSofg68G9/qH9hPKs0SXAhMrSppjLWQPT923i\ncKZQvrC+PANV/oK7mouOby51Fw0QMrBxWQaexo347ySl0rfYQUpD8y5IjZkuO608\n8HaYEyQyx6ngOSJJGHd1cXTtvQKBgQDA20mSIHIEUlkDMavfm/8YY7H5XQrKBdiV\nHIoFGM3G3jl+0k51Ay3N0JAI8OHzHk7P5qMfIrz8HteVBIHqi8pieIHSYIg/sCFy\ndJ0aN4bXZqXuKD3O9/Y7dsbnFCmg7PwWaDt1Q1EeVVsO7ctXXrbBt3yJmD9b+97q\nC7Q4pMIHeQKBgBsWvHoLj4U3llzlasiKAde0wt7I6sa92MaIRRuvVSX462QbzF+C\nurimcJj5F0U7AssF6M7Z0yDwghP92RSxFDjsY/Ur/9KNkzviKIFknego3TFl61Mh\nYDJEGYPuNkiFxAUVdXuAeSdfRg5wXQXaOccsl11n7c79hGZDZzaBkUihAoGAbqzp\nuaxZAlXns0eMJRU2/d4owrw8dteIBXqNUoN7hAb/4+H5GHmsjZKFNjxWztizzefD\n8RhUcDOa8G/XxqxWhtA1YG/5gOMpLq/xgJwhC/hifRwm7GGss09ksjQF985IlOtY\nQ+FP6iJ90UFyEj/OjbkpBSWUJsuSj6oL0P3sQ7ECgYEA8HUwZCQMVyYsQlPhQiDZ\nErX6GMu22cf+LnFCVVQjOGF29f5xbea9wElZCyqVfLKsWVSImaXjt090lRskcF39\n2gHjHpp4XCvLQ4AyAHmdlxkU9NgjGHFqF3OLUOSErL0ISNJ2dFauNTNqmUtVroDC\nX3CxydTQB9YQYscOLtbmRv0=\n-----END PRIVATE KEY-----\n",
+  "client_email": "tarmica@ordinal-gear-381907.iam.gserviceaccount.com",
+  "client_id": "105071255368070950722",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/tarmica%40ordinal-gear-381907.iam.gserviceaccount.com"
+}
