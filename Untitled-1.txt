@@ -1,0 +1,14 @@
+-- database: c:\Users\tarim\Documents\GitHub\AIChatbot\database.sqlite3
+
+-- Use the ▷ button in the top right corner to run the entire file.
+
+SELECT * FROM "StatementTable";
+DELETE from StatementTable WHERE text='gufydtrserdtfyguhi';
+DELETE from StatementTable WHERE text='ghhgftyfh';
+DELETE from StatementTable WHERE text='oiuytrttypu987t6rtyuio';
+DELETE from StatementTable WHERE text='j';
+DELETE from StatementTable WHERE text='jiouj';
+DELETE from StatementTable WHERE text='o[o';
+DELETE from StatementTable WHERE text='k';
+DELETE from StatementTable WHERE text='jfmfyujhgjh';
+DELETE from StatementTable WHERE text='ipooph';
