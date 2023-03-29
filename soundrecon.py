@@ -2,7 +2,6 @@ import socket
 import tqdm
 from time import sleep
 from google.cloud import speech
-import json
 
 #setting up socket engine
 server_ip = '127.0.0.1'
