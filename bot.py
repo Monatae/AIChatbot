@@ -3,7 +3,14 @@ from chatterbot.trainers import ChatterBotCorpusTrainer
 import socket
 #from transmit import sendaudio, receive_transcript
 from datalab import *
-import requests
+from twilio.rest import Client
+from flask import Flask, request
+from twilio.twiml.messaging_response import MessagingResponse
+
+#twilio constants
+account_sid = 'AC81c0755065e9eba6542ca94a9571ca8e'
+auth_token = '3092f6576db06deb1cac112ea17d86e1'
+client = Client(account_sid, auth_token)
 
 #setting up connection to the speech recognition server
 server_ip = '127.0.0.1'
@@ -25,23 +32,33 @@ friday = ChatBot("Friday",
 friday.set_trainer(ChatterBotCorpusTrainer)
 friday.train("chatterbot.corpus.english.quries", "chatterbot.corpus.english.greetings", "chatterbot.corpus.english.conversations")
 exit_tuple = ('exit', 'see you later', 'bye')
-user_input = input('You: ') #place twilio whatsapp endpoint here
-revised_user_input = user_input.replace('You: ', '', 1)
 
-if check_existence(revised_user_input) == False:
-    print('Friday: Sorry, I do not fully understand')
-else:
-    while check_existence(revised_user_input) == True:
-        #this is where the entire exchange will happen
-        #user input is fed into the chatbot from this point and the response is generated here.
-        #I am the Salt Bae of spaghetti code!
-        #Tarmica, this is our custom pre processor function
-        if user_input.lower() in exit_tuple:
-            print('Friday: Bye')
-            break
-        else:
-            response = friday.get_response(revised_user_input)
-            print('Friday: ', response) 
-            requests.get()#Tarmica, place twilio whatsapp endpoint here to send back bot's response
+
+
+app = Flask(__name__)
+
+@app.route('/webhook', methods=['POST'])
+def webhook():
+    incoming_msg = request.values.get('Body', '')
+    resp = MessagingResponse()
+    # Use Chatterbot to generate a response
+    if check_existence(incoming_msg) == False:
+        resp.message('Sorry, I do not fully understand')
+    else:
+        while check_existence(incoming_msg) == True:
+            if incoming_msg.lower() in exit_tuple:
+                resp.message('Bye')
+                break
+            else:
+                response = friday.get_response(incoming_msg)
+                resp.message(response)
+    return str(resp)
+
+
+
+if __name__ == '__main__':
+    app.run()
+
+
         
         

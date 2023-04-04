@@ -1,4 +1,6 @@
-create 2 servers and connect them through a socket
-one server converts speech to text and the other feeds the text to the chatbot
+create 2 servers and connect them through a socket (done)
+one server converts speech to text and the other feeds the text to the chatbot(done)
 
 speech converter is the socket server and chatbot is the client.
+
+integrate with twilio to interface with whatsapp
