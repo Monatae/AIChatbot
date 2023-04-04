@@ -3,6 +3,7 @@ from chatterbot.trainers import ChatterBotCorpusTrainer
 import socket
 #from transmit import sendaudio, receive_transcript
 from datalab import *
+import requests
 
 #setting up connection to the speech recognition server
 server_ip = '127.0.0.1'
@@ -40,6 +41,7 @@ else:
             break
         else:
             response = friday.get_response(revised_user_input)
-            print('Friday: ', response) #place twilio whatsapp endpoint here
+            print('Friday: ', response) 
+            requests.get()#Tarmica, place twilio whatsapp endpoint here to send back bot's response
         
         
