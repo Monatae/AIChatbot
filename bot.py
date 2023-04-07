@@ -1,68 +1,73 @@
-from chatterbot import ChatBot
-from chatterbot.trainers import ChatterBotCorpusTrainer
-import socket
-#from transmit import sendaudio, receive_transcript
-from datalab import *
 from twilio.rest import Client
-from flask import Flask, request
-from twilio.twiml.messaging_response import MessagingResponse
+import dialogflow_v2 as dialogflow
+from google.api_core.exceptions import InvalidArgument
+import os
 
-#twilio constants
-account_sid = 'AC81c0755065e9eba6542ca94a9571ca8e'
-auth_token = '3092f6576db06deb1cac112ea17d86e1'
+# Set up the Twilio client
+account_sid = "YOUR_ACCOUNT_SID"
+auth_token = "YOUR_AUTH_TOKEN"
 client = Client(account_sid, auth_token)
 
-#setting up connection to the speech recognition server
-server_ip = '127.0.0.1'
-server_port = 5001
-server_address = (server_ip, server_port)
-sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-sock.connect((server_address))
-####this is where sendaudio and receive_transcript functions come into play#####
+# Set up the Dialogflow client
+DIALOGFLOW_PROJECT_ID = "YOUR_PROJECT_ID"
+DIALOGFLOW_LANGUAGE_CODE = "en"
+os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "/path/to/your/credentials.json"
+session_client = dialogflow.SessionsClient()
 
 
-#setting up the chatbot
+# Define a function to process incoming WhatsApp messages
+def process_message(from_number, body):
+    # Set up the Dialogflow session
+    session_id = f"whatsapp-{from_number}"
+    session = session_client.session_path(DIALOGFLOW_PROJECT_ID, session_id)
+
+    # Send the user's message to Dialogflow
+    text_input = dialogflow.TextInput(text=body, language_code=DIALOGFLOW_LANGUAGE_CODE)
+    query_input = dialogflow.QueryInput(text=text_input)
+    try:
+        response = session_client.detect_intent(
+            session=session, query_input=query_input
+        )
+    except InvalidArgument:
+        # Handle any errors from Dialogflow
+        return "I'm sorry, I didn't understand that."
+
+    # Get the Dialogflow response
+    if response.query_result.intent.is_fallback:
+        return "I'm sorry, I didn't understand that."
+    else:
+        return response.query_result.fulfillment_text
 
 
+# Define a function to send a message back to the user
+def send_message(to_number, message):
+    message = client.messages.create(
+        body=message, from_="whatsapp:+14155238886", to=f"whatsapp:{to_number}"
+    )
+    return message.sid
 
+
+# Set up a Flask app to receive incoming messages from Twilio
+from flask import Flask, request
 
 app = Flask(__name__)
 
-@app.route('/webhook', methods=['POST'])
+
+@app.route("/webhook", methods=["POST"])
 def webhook():
-    friday = ChatBot("Friday",
-                 read_only = True,
-                 storage_adapter ="chatterbot.storage.SQLStorageAdapter",
-                 database_uri="sqlite:///database.sqlite3"
-                 )
+    # Parse the incoming Twilio message
+    from_number = request.form["From"]
+    body = request.form["Body"]
 
-    #training the chatbot
-    friday.set_trainer(ChatterBotCorpusTrainer)
-    friday.train("chatterbot.corpus.english.quries", "chatterbot.corpus.english.greetings", "chatterbot.corpus.english.conversations")
-    exit_tuple = ('exit', 'see you later', 'bye')
-    incoming_msg = request.values.get('Body', '')
-    resp = MessagingResponse()
-    # Use Chatterbot to generate a response
-    if check_existence(incoming_msg) == False:
-        resp.message('Sorry, I do not fully understand')
-    else:
-        while check_existence(incoming_msg) == True:
-            if incoming_msg.lower() in exit_tuple:
-                resp.message('Bye')
-                break
-            else:
-                response = friday.get_response(incoming_msg)
-                statement = response.text
-                resp.message(statement)
-                break
-            
-    return str(resp)
+    # Process the message using Dialogflow
+    response = process_message(from_number, body)
+
+    # Send the response back to the user
+    send_message(from_number, response)
+
+    return "OK"
 
 
-
-if __name__ == '__main__':
-    app.run(debug=True, port=5000)
-
-
-        
-        
+# Run the Flask app
+if __name__ == "__main__":
+    app.run(debug=True)

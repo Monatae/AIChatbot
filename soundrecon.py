@@ -1,7 +1,8 @@
 import socket
 import tqdm
 from time import sleep
-from google.cloud import speech
+from google.cloud import speech_v1
+
 
 # setting up socket engine
 server_ip = "127.0.0.1"
@@ -40,15 +41,18 @@ while not done:
 sleep(10)
 
 # speech recognition
-client = speech.SpeechClient.from_service_account_file("key.json")
-with open("test.wav", "rb") as f:
+client = speech_v1.SpeechClient.from_service_account_file("key.json")
+config = {
+    "language_code": "en-US",
+    "audio_channel_count": 2,
+    "enable_separate_recognition_per_channel": True,
+    "model": "phone_call",
+    "use_enhanced": True,
+    "audio_encoding": speech_v1.enums.RecognitionConfig.AudioEncoding.OPUS,
+}
+with open(filename, "rb") as f:
     content = f.read()
-    audio_file = speech.RecognitionAudio(content=content)
-    config = speech.RecognitionConfig(
-        sample_rate_hertz=16000,
-        enable_automatic_punctuation=True,
-        language_code="en-US"
-    )
+    audio_file = speech_v1.RecognitionAudio(content=content)
     response = client.recognize(config=config, audio=audio_file)
     for result in response.results:
         print("Transcript: {}".format(result.alternatives[0].transcript))
