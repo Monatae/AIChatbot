@@ -2,6 +2,7 @@ import socket
 import tqdm
 from time import sleep
 from google.cloud import speech
+import random
 
 # setting up socket engine
 server_ip = "127.0.0.1"
@@ -13,7 +14,7 @@ sock.listen()
 
 
 connection, client_address = sock.accept()
-filename = "3" + connection.recv(1024).decode()
+filename = str(random.randint(0, 10000)) + connection.recv(1024).decode()
 filesize = connection.recv(1024).decode()
 
 print("Connection from", client_address)
@@ -47,7 +48,7 @@ with open("test.wav", "rb") as f:
     config = speech.RecognitionConfig(
         sample_rate_hertz=16000,
         enable_automatic_punctuation=True,
-        language_code="en-US"
+        language_code="en-US",
     )
     response = client.recognize(config=config, audio=audio_file)
     for result in response.results:
