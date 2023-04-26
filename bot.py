@@ -1,7 +1,7 @@
 from flask import Flask, request
 from twilio.twiml.messaging_response import MessagingResponse
 from google.oauth2 import service_account
-from google.cloud import dialogflow
+import google.cloud.dialogflow_v2 as dialogflow
 
 app = Flask(__name__)
 
