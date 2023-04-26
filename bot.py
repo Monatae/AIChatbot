@@ -6,10 +6,8 @@ from google.cloud import dialogflow
 app = Flask(__name__)
 
 # Set up Dialogflow API credentials
-credentials = service_account.Credentials.from_service_account_file(
-    "friday-381906-3293c69c7a04.json"
-)
-project_id = "friday-381906"
+credentials = service_account.Credentials.from_service_account_file("new.json")
+project_id = "premium-client-384820"
 
 # Create a Dialogflow client
 client = dialogflow.SessionsClient(credentials=credentials)
